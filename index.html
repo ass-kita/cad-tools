@@ -1,115 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAD Automation Tools Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { 
-            background-color: #1a1a1a; 
-            font-family: 'Inter', sans-serif;
-        }
-        /* スクロールバーも洗練された印象に */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1a1a1a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-    </style>
-</head>
-<body class="p-6 md:p-12 text-gray-200">
+<div class="flex flex-col bg-[#2d2d2d] rounded-lg overflow-hidden border-l-8 border-green-500 p-4 w-full max-w-sm shadow-lg hover:bg-[#353535] transition-colors cursor-pointer">
+  
+  <div class="text-green-500 text-xs font-bold mb-1 tracking-wider">
+    一括画層変換
+  </div>
 
-    <div class="max-w-6xl mx-auto">
-        
-        <header class="mb-12">
-            <h1 class="text-gray-500 text-xs font-bold tracking-[0.3em] uppercase mb-4">
-                Engineering Solutions
-            </h1>
-            <div class="text-white text-4xl font-black tracking-tighter">
-                CAD LISP <span class="text-green-500">.</span>
-            </div>
-            <div class="h-1 w-20 bg-green-500 mt-4"></div>
-        </header>
+  <div class="text-white text-3xl font-extrabold mb-2 tracking-tight">
+    BLCHNG
+  </div>
 
-        <div class="mb-12 max-w-md">
-            <div class="relative group">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-500 group-focus-within:text-green-500 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </span>
-                <input 
-                    type="text" 
-                    id="searchInput"
-                    placeholder="キーワードでツールを検索..." 
-                    class="w-full bg-[#262626] text-white border border-gray-800 rounded-xl py-4 pl-12 pr-4 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all placeholder-gray-600 shadow-2xl"
-                >
-            </div>
-        </div>
+  <div class="text-gray-300 text-sm mb-4">
+    ブロックの中身をByLayerに
+  </div>
 
-        <div id="toolGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            </div>
-
-        <div id="noResults" class="hidden text-center py-20 text-gray-600">
-            一致するツールが見つかりませんでした。
-        </div>
-
+  <div class="flex items-center gap-2 mt-auto">
+    <div class="flex items-center bg-[#3d3d3d] text-gray-400 text-[10px] px-2 py-0.5 rounded border border-gray-600">
+      <span class="mr-1">#</span>AutoCAD
     </div>
-
-    <script>
-        // 1. データの定義（ここを増やすだけでカードが増えます）
-        const tools = [
-            { title: "BLCHNG", category: "一括画層変換", desc: "ブロック内オブジェクトの画層をByLayerに一括変更します。", color: "border-green-500", text: "text-green-500", hover: "group-hover:text-green-500", tags: ["AutoCAD", "Layer"] },
-            { title: "LYMAKE", category: "レイアウト作成", desc: "標準図枠を全レイアウトへ一括で自動配置し、設定を統一します。", color: "border-blue-500", text: "text-blue-500", hover: "group-hover:text-blue-500", tags: ["Layout", "Frame"] },
-            { title: "PRTSET", category: "印刷設定", desc: "複数の図面シートを一括でPDF出力用ページ設定に更新します。", color: "border-orange-500", text: "text-orange-500", hover: "group-hover:text-orange-500", tags: ["Print", "PDF"] },
-            { title: "LAYISO", category: "画層分離", desc: "選択した画層以外を一時的に非表示またはロックし作業を効率化します。", color: "border-purple-500", text: "text-purple-500", hover: "group-hover:text-purple-500", tags: ["Layer", "View"] },
-            { title: "TXTRED", category: "文字修正", desc: "図面内の特定の文字列を検索し、複数の属性情報を一括置換します。", color: "border-red-500", text: "text-red-500", hover: "group-hover:text-red-500", tags: ["Text", "Find"] },
-            { title: "DIMADJ", category: "寸法調整", desc: "混雑した寸法線をJIS規格に基づいた一定間隔に自動整列させます。", color: "border-yellow-500", text: "text-yellow-500", hover: "group-hover:text-yellow-500", tags: ["Dimension", "Align"] }
-        ];
-
-        const toolGrid = document.getElementById('toolGrid');
-        const searchInput = document.getElementById('searchInput');
-        const noResults = document.getElementById('noResults');
-
-        // 2. 表示用関数
-        function renderTools(filter = '') {
-            toolGrid.innerHTML = '';
-            const query = filter.toLowerCase();
-
-            const filteredTools = tools.filter(t => 
-                t.title.toLowerCase().includes(query) || 
-                t.category.includes(query) || 
-                t.desc.includes(query) ||
-                t.tags.some(tag => tag.toLowerCase().includes(query))
-            );
-
-            if (filteredTools.length === 0) {
-                noResults.classList.remove('hidden');
-            } else {
-                noResults.classList.add('hidden');
-                filteredTools.forEach(tool => {
-                    const card = `
-                        <div class="group flex flex-col bg-[#262626] rounded-2xl border-l-[6px] ${tool.color} p-8 shadow-lg hover:bg-[#2d2d2d] hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-gray-800">
-                            <div class="${tool.text} text-[10px] font-bold uppercase tracking-widest mb-2">${tool.category}</div>
-                            <div class="text-white text-3xl font-black mb-3 tracking-tighter ${tool.hover} transition-colors">${tool.title}</div>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-8">${tool.desc}</p>
-                            <div class="flex flex-wrap gap-2 mt-auto">
-                                ${tool.tags.map(tag => `
-                                    <span class="text-[9px] text-gray-500 border border-gray-800 px-2 py-1 rounded-md uppercase tracking-tighter">#${tag}</span>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                    toolGrid.innerHTML += card;
-                });
-            }
-        }
-
-        // 3. イベントリスナー（入力されるたびに動く）
-        searchInput.addEventListener('input', (e) => {
-            renderTools(e.target.value);
-        });
-
-        // 初回実行
-        renderTools();
-    </script>
-</body>
-</html>
+    <div class="flex items-center bg-[#3d3d3d] text-gray-400 text-[10px] px-2 py-0.5 rounded border border-gray-600">
+      <span class="mr-1">#</span>Layer
+    </div>
+  </div>
+</div>
