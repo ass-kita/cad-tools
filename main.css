@@ -1,0 +1,287 @@
+/* --- ベースデザイン（仕様維持） --- */
+body {
+    background: #0a0a0a; /* より深い黒で高級感を出す */
+    color: #e0e0e0;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+    margin: 40px;
+    line-height: 1.6;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 80px;
+margin: 0;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(to bottom, #fff, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* --- 検索窓・ボタン（洗練版） --- */
+#search {
+    background: #1f1f1f;
+    border: 1px solid #333;
+    padding: 12px 18px;
+    border-radius: 20px;
+    color: white;
+    width: 320px;
+    transition: 0.3s;
+}
+
+#search:focus {
+    outline: none;
+    border-color: #666;
+}
+
+.btn-secondary {
+    background: #222;
+    border: 1px solid #333;
+    color: #ccc;
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* --- タグクラウド --- */
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.tag-cloud .tag {
+    background: #222;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 1px solid #333;
+    transition: 0.2s;
+}
+
+.tag-cloud .tag:hover {
+    background: #444;
+}
+
+/* --- インフォメーション（仕様維持） --- */
+.info-section { margin-bottom: 40px; }
+.info-card {
+    background: #181818;
+    padding: 20px;
+    border-radius: 16px;
+    border-left: 6px solid #444;
+    font-size: 14px;
+    color: #ccc;
+}
+.info-update { margin-top: 10px; }
+
+/* --- 検索履歴（Recently Viewed：軽量版仕様） --- */
+.grid-mini {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.card-mini {
+    background: #1c1c1c;
+    padding: 0 15px;
+    border-radius: 12px;
+    min-width: 150px;
+    height: 55px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-left: 4px solid; /* 左側の細い線仕様 */
+    flex-shrink: 0;
+    transition: 0.25s;
+}
+
+.card-mini:hover { transform: translateY(-3px); }
+.card-mini .name { 
+    font-size: 16px; 
+    font-weight: 700; 
+    margin: 0; 
+    color: #bbb; /* 通常時はグレー系 */
+    transition: color 0.3s ease; /* 滑らかに変化 */
+}
+
+/* ホバー時に文字色をテーマカラーに変更 */
+.card-mini:hover .name {
+    color: currentColor; 
+}
+/* --- メイングリッド --- */
+#grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    /* ベース：少し金属の光沢感があるダークグレーのグラデーション */
+    background: linear-gradient(135deg, #1c1c1c 0%, #252525 50%, #1c1c1c 100%);
+    background-size: 300% 300%; /* アニメーション用に背景を広く取る */
+    background-position: 0% 0%;
+    
+    border-radius: 18px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.4s ease; /* 変化を少しゆったり滑らかに */
+    border-left: 10px solid;
+    position: relative;
+    border-top: 1px solid rgba(255,255,255,0.1); /* 金属の縁のような光 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    /* ホバー時：光（グラデーションの明るい部分）を中央に移動させる */
+    background-position: 100% 100%;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 12px 50px rgba(255,255,255,0.2);
+}
+.card .name { 
+    font-size: 26px; 
+    font-weight: 700;
+    color: #ffffff; /* 通常時は白 */
+    transition: color 0.3s ease; /* 色変化を滑らかにする */
+}
+
+/* ホバー時に文字色をテーマカラーに変更 */
+.card:hover .name {
+    color: currentColor; 
+}
+.card .category { font-size: 12px; letter-spacing: .2em; margin-bottom: 6px; }
+.card .desc { font-size: 14px; opacity: .8; margin-bottom: 10px; }
+
+/* カード内のタグ（元に戻した仕様） */
+.card .tag {
+    font-size: 12px;
+    border: 1px solid #444;
+    padding: 3px 6px;
+    margin-right: 8px;
+    display: inline-block;
+    margin-top: 5px;
+    color: #aaa;
+}
+
+/* --- モーダル（重要：hiddenを有効にする） --- */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.hidden { display: none !important; } /* 仕様：hiddenがあれば絶対に消す */
+
+.modal-content {
+    background: #181818;
+    padding: 40px;
+    border-radius: 18px;
+    width: 1200px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* 手順横の注釈スタイル */
+.dl-note {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+/* --- 共通コンポーネント --- */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.compare { position: relative; max-width: 700px; overflow: hidden; }
+.compare img { width: 100%; display: block; }
+.after { position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden; border-right: 2px solid white; }
+.after img { width: 700px; max-width: none; }
+.slider { position: absolute; top: 0; left: 50%; width: 40px; height: 100%; margin-left: -20px; display: flex; align-items: center; justify-content: center; cursor: ew-resize; z-index: 10; }
+
+.steps-flow {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    margin-top: 20px;
+}
+
+.step-box { width: 260px; flex-shrink: 0; }
+.step-box img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; cursor: pointer; }
+
+.imgViewer {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+/* モーダル内のコマンド名を大きく戻す */
+.modal-title {
+    font-size: 42px;    /* カードの26pxより大きく表示 */
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+/* 注釈を横並びに許可する */
+.dl-note {
+    font-size: 11px;
+    opacity: 0.6;
+    display: inline-block; /* 必須：これがないと手順の横に並びません */
+    margin-left: 10px;
+}
+
+/* 履歴クリアボタンのホバー演出 */
+#clearRecentBtn {
+    cursor: pointer;
+    border: 1px solid #444;
+    transition: 0.2s;
+}
+
+#clearRecentBtn:hover {
+    border-color: #666;
+    background: #444;
+    color: #fff;
+}

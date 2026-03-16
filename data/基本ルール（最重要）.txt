@@ -1,0 +1,227 @@
+基本ルール（最重要）
+
+このサイトは 4つの役割分担で動いています。
+
+ファイル	役割	何を変える時
+tools.csv	データ	ツール追加・色・画像
+index.html	骨組み	レイアウト変更
+main.css	見た目	色・サイズ・カードデザイン
+script.js	機能	検索・モーダル・動作
+
+つまり
+
+データ → CSV
+見た目 → CSS
+構造 → HTML
+動作 → JS
+
+このルールを守れば 壊れません。
+
+① 新しいLISPを追加する
+
+変更ファイル
+
+data/tools.csv
+
+追加するだけ
+
+004,NEWTOOL,Layer,説明,NEW,"手順1|手順2",layer|new,#22c55e,img/before/a.jpg,img/after/a.jpg,lisp/new.lsp,code/new.lsp,2026-03-10,Tanaka,stable
+
+それだけで
+
+カード表示
+
+検索
+
+モーダル
+
+ダウンロード
+
+ランキング
+
+全部動きます。
+
+② カードの色を変える
+
+変更
+
+tools.csv
+
+ここ
+
+color
+
+例
+
+#22c55e
+
+変更
+
+#ff0000
+
+カード色が変わります。
+
+③ カードデザイン変更
+
+変更
+
+main.css
+
+ここ
+
+.card
+
+例
+
+.card{
+border-radius:18px;
+}
+
+角丸変更
+
+border-radius:30px;
+④ ホバー動作変更
+
+変更
+
+main.css
+
+ここ
+
+.card:hover
+
+今
+
+transform:translateY(-6px);
+
+強くする
+
+transform:translateY(-12px);
+⑤ カードサイズ変更
+
+変更
+
+main.css
+
+ここ
+
+#grid
+
+今
+
+grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+
+小さく
+
+minmax(250px,1fr)
+
+大きく
+
+minmax(380px,1fr)
+⑥ モーダル内容変更
+
+変更
+
+script.js
+
+ここ
+
+openModal()
+
+例
+
+<h2>${t.name}</h2>
+
+ここに項目追加できます
+
+例
+
+<p>作者：${t.author}</p>
+⑦ 検索仕様変更
+
+変更
+
+script.js
+
+ここ
+
+draw()
+
+今検索している項目
+
+name
+category
+tags
+
+例えば desc検索追加
+
+t.desc.toLowerCase().includes(s)
+
+追加。
+
+⑧ 人気ランキング数変更
+
+変更
+
+script.js
+
+ここ
+
+slice(0,5)
+
+10件
+
+slice(0,10)
+⑨ Before/After比較変更
+
+変更
+
+script.js
+
+ここ
+
+slide()
+
+スライダー動作。
+
+⑩ LISPコード表示デザイン
+
+変更
+
+main.css
+
+ここ
+
+.code
+
+例
+
+background:black;
+実は一番重要なルール
+
+触る順番
+
+① CSV
+② CSS
+③ JS
+④ HTML
+
+これを守ると 壊れる確率が激減します。
+
+プロがやる運用（重要）
+
+変更の9割は
+
+tools.csv
+
+だけです。
+
+つまり
+
+Excel管理
+↓
+CSV保存
+↓
+サイト更新
+
+だけ。
