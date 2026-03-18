@@ -1,4 +1,4 @@
-﻿id,name,category,desc,command,steps,steptext,tags,before_img,after_img,lisp_file,code_file,date,author,status,CSV_output
+﻿id,name,category,desc,command,steps,steptext,tags,before_img,after_img,lisp_file,code_file,date,author,status
 1,DIMQUICK,寸法,1000mm定型寸法の高速作図,DIMQUICK,img/steps/dimquick_1.png|img/steps/dimquick_2.png|img/steps/dimquick_3.png,手順1|手順2|手順3,寸法,img/before/dimquick.jpg,img/after/dimquick.jpg,lisp/dimquick.lsp,code/dimquick.lsp,250416,北川,stable,"1,DIMQUICK,寸法,1000mm定型寸法の高速作図,DIMQUICK,img/steps/dimquick_1.png|img/steps/dimquick_2.png|img/steps/dimquick_3.png,手順1|手順2|手順3,寸法,img/before/dimquick.jpg,img/after/dimquick.jpg,lisp/dimquick.lsp,code/dimquick.lsp,250416,北川,stable"
 2,PLDIM,寸法,複数ポリライン一括寸法記入,PLDIM,img/steps/pldim_1.png|img/steps/pldim_2.png|img/steps/pldim_3.png,手順1|手順2|手順3,寸法,img/before/pldim.jpg,img/after/pldim.jpg,lisp/pldim.lsp,code/pldim.lsp,260202,北川,stable,"2,PLDIM,寸法,複数ポリライン一括寸法記入,PLDIM,img/steps/pldim_1.png|img/steps/pldim_2.png|img/steps/pldim_3.png,手順1|手順2|手順3,寸法,img/before/pldim.jpg,img/after/pldim.jpg,lisp/pldim.lsp,code/pldim.lsp,260202,北川,stable"
 3,DIMFIT,寸法,寸法線高さの原点一括集約,DIMFIT,img/steps/dimfit_1.png|img/steps/dimfit_2.png|img/steps/dimfit_3.png,手順1|手順2|手順3,寸法,img/before/dimfit.jpg,img/after/dimfit.jpg,lisp/dimfit.lsp,code/dimfit.lsp,260129,北川,stable,"3,DIMFIT,寸法,寸法線高さの原点一括集約,DIMFIT,img/steps/dimfit_1.png|img/steps/dimfit_2.png|img/steps/dimfit_3.png,手順1|手順2|手順3,寸法,img/before/dimfit.jpg,img/after/dimfit.jpg,lisp/dimfit.lsp,code/dimfit.lsp,260129,北川,stable"
@@ -53,8 +53,8 @@
 52,PLCHK,ポリライン,ポリラインの角（かど）を調べ、直角(90°)や直線(180°)ではない『中途半端な角度』をあぶり出す,PLCHK,img/steps/plchk_1.png|img/steps/plchk_2.png|img/steps/plchk_3.png,手順1|手順2|手順3,ポリライン,img/before/plchk.jpg,img/after/plchk.jpg,lisp/plchk.lsp,code/plchk.lsp,260202,北川,stable,"52,PLCHK,ポリライン,ポリラインの角（かど）を調べ、直角(90°)や直線(180°)ではない『中途半端な角度』をあぶり出す,PLCHK,img/steps/plchk_1.png|img/steps/plchk_2.png|img/steps/plchk_3.png,手順1|手順2|手順3,ポリライン,img/before/plchk.jpg,img/after/plchk.jpg,lisp/plchk.lsp,code/plchk.lsp,260202,北川,stable"
 53,CCLIP00 ,コピー,"絶対座標の基点0,0でコピークリップする",CCLIP00 ,img/steps/cclip00 _1.png|img/steps/cclip00 _2.png|img/steps/cclip00 _3.png,手順1|手順2|手順3,コピー,img/before/cclip00 .jpg,img/after/cclip00 .jpg,lisp/cclip00 .lsp,code/cclip00 .lsp,250416,北川,stable,"53,CCLIP00 ,コピー,絶対座標の基点0,0でコピークリップする,CCLIP00 ,img/steps/cclip00 _1.png|img/steps/cclip00 _2.png|img/steps/cclip00 _3.png,手順1|手順2|手順3,コピー,img/before/cclip00 .jpg,img/after/cclip00 .jpg,lisp/cclip00 .lsp,code/cclip00 .lsp,250416,北川,stable"
 54,PASTE00,貼付,"絶対座標の基点0,0に貼り付ける",PASTE00 (基点00貼付),img/steps/paste00_1.png|img/steps/paste00_2.png|img/steps/paste00_3.png,手順1|手順2|手順3,貼付,img/before/paste00.jpg,img/after/paste00.jpg,lisp/paste00.lsp,code/paste00.lsp,250416,北川,stable,"54,PASTE00,貼付,絶対座標の基点0,0に貼り付ける,PASTE00 (基点00貼付),img/steps/paste00_1.png|img/steps/paste00_2.png|img/steps/paste00_3.png,手順1|手順2|手順3,貼付,img/before/paste00.jpg,img/after/paste00.jpg,lisp/paste00.lsp,code/paste00.lsp,250416,北川,stable"
-55,CUT00,切り取り,"絶対座標の基点0,0で切り取る",CUT00,img/steps/cut00_1.png|img/steps/cut00_2.png|img/steps/cut00_3.png,手順1|手順2|手順3,切り取り,img/before/cut00.jpg,img/after/cut00.jpg,lisp/cut00.lsp,code/cut00.lsp,260313,北川,stable,"55,CUT00,切り取り,絶対座標の基点0,0で切り取る,CUT00,img/steps/cut00_1.png|img/steps/cut00_2.png|img/steps/cut00_3.png,手順1|手順2|手順3,切り取り,img/before/cut00.jpg,img/after/cut00.jpg,lisp/cut00.lsp,code/cut00.lsp,260313,北川,stable"
-56,CUTBASE,切り取り,基点切り取り,CUTBASE,img/steps/cutbase_1.png|img/steps/cutbase_2.png|img/steps/cutbase_3.png,手順1|手順2|手順3,切り取り,img/before/cutbase.jpg,img/after/cutbase.jpg,lisp/cutbase.lsp,code/cutbase.lsp,260302,北川,stable,"56,CUTBASE,切り取り,基点切り取り,CUTBASE,img/steps/cutbase_1.png|img/steps/cutbase_2.png|img/steps/cutbase_3.png,手順1|手順2|手順3,切り取り,img/before/cutbase.jpg,img/after/cutbase.jpg,lisp/cutbase.lsp,code/cutbase.lsp,260302,北川,stable"
+55,CUT00,カット,"絶対座標の基点0,0で切り取る",CUT00,img/steps/cut00_1.png|img/steps/cut00_2.png|img/steps/cut00_3.png,手順1|手順2|手順3,切り取り,img/before/cut00.jpg,img/after/cut00.jpg,lisp/cut00.lsp,code/cut00.lsp,260313,北川,stable,"55,CUT00,切り取り,絶対座標の基点0,0で切り取る,CUT00,img/steps/cut00_1.png|img/steps/cut00_2.png|img/steps/cut00_3.png,手順1|手順2|手順3,切り取り,img/before/cut00.jpg,img/after/cut00.jpg,lisp/cut00.lsp,code/cut00.lsp,260313,北川,stable"
+56,CUTBASE,カット,基点切り取り,CUTBASE,img/steps/cutbase_1.png|img/steps/cutbase_2.png|img/steps/cutbase_3.png,手順1|手順2|手順3,切り取り,img/before/cutbase.jpg,img/after/cutbase.jpg,lisp/cutbase.lsp,code/cutbase.lsp,260302,北川,stable,"56,CUTBASE,切り取り,基点切り取り,CUTBASE,img/steps/cutbase_1.png|img/steps/cutbase_2.png|img/steps/cutbase_3.png,手順1|手順2|手順3,切り取り,img/before/cutbase.jpg,img/after/cutbase.jpg,lisp/cutbase.lsp,code/cutbase.lsp,260302,北川,stable"
 57,PAPERZOOMALL,レイアウト,複数レイアウト内の表示を一括で全て全画面にする,PAPERZOOMALL,img/steps/paperzoomall_1.png|img/steps/paperzoomall_2.png|img/steps/paperzoomall_3.png,手順1|手順2|手順3,レイアウト,img/before/paperzoomall.jpg,img/after/paperzoomall.jpg,lisp/paperzoomall.lsp,code/paperzoomall.lsp,251010,北川,stable,"57,PAPERZOOMALL,レイアウト,複数レイアウト内の表示を一括で全て全画面にする,PAPERZOOMALL,img/steps/paperzoomall_1.png|img/steps/paperzoomall_2.png|img/steps/paperzoomall_3.png,手順1|手順2|手順3,レイアウト,img/before/paperzoomall.jpg,img/after/paperzoomall.jpg,lisp/paperzoomall.lsp,code/paperzoomall.lsp,251010,北川,stable"
 58,FRM,レイアウト,レイアウト連続作成,FRM,img/steps/frm_1.png|img/steps/frm_2.png|img/steps/frm_3.png,手順1|手順2|手順3,レイアウト,img/before/frm.jpg,img/after/frm.jpg,lisp/frm.lsp,code/frm.lsp,260116,北川,stable,"58,FRM,レイアウト,レイアウト連続作成,FRM,img/steps/frm_1.png|img/steps/frm_2.png|img/steps/frm_3.png,手順1|手順2|手順3,レイアウト,img/before/frm.jpg,img/after/frm.jpg,lisp/frm.lsp,code/frm.lsp,260116,北川,stable"
 59,SETLTSCALE,設定,ブロック内の線種尺度を変更する,SETLTSCALE,img/steps/setltscale_1.png|img/steps/setltscale_2.png|img/steps/setltscale_3.png,手順1|手順2|手順3,設定,img/before/setltscale.jpg,img/after/setltscale.jpg,lisp/setltscale.lsp,code/setltscale.lsp,251020,北川,stable,"59,SETLTSCALE,設定,ブロック内の線種尺度を変更する,SETLTSCALE,img/steps/setltscale_1.png|img/steps/setltscale_2.png|img/steps/setltscale_3.png,手順1|手順2|手順3,設定,img/before/setltscale.jpg,img/after/setltscale.jpg,lisp/setltscale.lsp,code/setltscale.lsp,251020,北川,stable"
@@ -69,31 +69,3 @@
 68,XYMC,移動コピー,指定距離移動コピー,XYMC,img/steps/xymc_1.png|img/steps/xymc_2.png|img/steps/xymc_3.png,手順1|手順2|手順3,移動コピー,img/before/xymc.jpg,img/after/xymc.jpg,lisp/xymc.lsp,code/xymc.lsp,260122,北川,stable,"68,XYMC,移動コピー,指定距離移動コピー,XYMC,img/steps/xymc_1.png|img/steps/xymc_2.png|img/steps/xymc_3.png,手順1|手順2|手順3,移動コピー,img/before/xymc.jpg,img/after/xymc.jpg,lisp/xymc.lsp,code/xymc.lsp,260122,北川,stable"
 69,OPENSUPPORT,ファイル,SUPPORTフォルダを開きたい,OPENSUPPORT（サポートフォルダを開く）,img/steps/opensupport_1.png|img/steps/opensupport_2.png|img/steps/opensupport_3.png,手順1|手順2|手順3,ファイル,img/before/opensupport.jpg,img/after/opensupport.jpg,lisp/opensupport.lsp,code/opensupport.lsp,250418,北川,stable,"69,OPENSUPPORT,ファイル,SUPPORTフォルダを開きたい,OPENSUPPORT（サポートフォルダを開く）,img/steps/opensupport_1.png|img/steps/opensupport_2.png|img/steps/opensupport_3.png,手順1|手順2|手順3,ファイル,img/before/opensupport.jpg,img/after/opensupport.jpg,lisp/opensupport.lsp,code/opensupport.lsp,250418,北川,stable"
 70,PLMENSEKI,ポリライン,,PLMENSEKI,img/steps/plmenseki_1.png|img/steps/plmenseki_2.png|img/steps/plmenseki_3.png,手順1|手順2|手順3,ポリライン,img/before/plmenseki.jpg,img/after/plmenseki.jpg,lisp/plmenseki.lsp,code/plmenseki.lsp,260305,北川,stable,"70,PLMENSEKI,ポリライン,,PLMENSEKI,img/steps/plmenseki_1.png|img/steps/plmenseki_2.png|img/steps/plmenseki_3.png,手順1|手順2|手順3,ポリライン,img/before/plmenseki.jpg,img/after/plmenseki.jpg,lisp/plmenseki.lsp,code/plmenseki.lsp,260305,北川,stable"
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,
