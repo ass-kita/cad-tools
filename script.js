@@ -1,5 +1,5 @@
 function getCategoryColor(category) { return categoryColors[category] || '#808080'; }
-const categoryColors = { レイヤー: '#7FFF00', ブロック: '#e74c3c', 文字: '#f39c12' , 削除: '#FF1493' , コピー: '#8A2BE2', 寸法: '#00FFFF', レイアウト: '#FF00FF', ポリライン: '#FFFF00' , 属性: '#00FF00' , 設定: '#FF4500' , 尺度: '#FFB6C1', 設定: '#FF4500' , 尺度: '#FFB6C1' , 切り取り: '#ADD8E6' , ハッチング: '#FFDAB9' , ツール: '#20B2AA' , グループ: '#00BFFF', 貼付: '#F08080' , ファイル: '#E6E6FA' , 図形: '#FFFACD' , チェック: '#FFA500' , 移動コピー: '#32CD32'    };
+const categoryColors = { レイヤー: '#7FFF00', ブロック: '#e74c3c', 文字: '#f39c12' , 削除: '#FF1493' , コピー: '#8A2BE2', 寸法: '#00FFFF', レイアウト: '#FF00FF', ポリライン: '#FFFF00' , 属性: '#00FF00' , 設定: '#FF4500' , 尺度: '#FFB6C1', 設定: '#FF4500' , 尺度: '#FFB6C1' , 切り取り: '#ADD8E6' , ハッチング: '#FFDAB9' , ツール: '#20B2AA' , グループ: '#00BFFF', 貼付: '#F08080' , ファイル: '#E6E6FA' , 図形: '#FFFACD' , チェック: '#FFA500' , 移動コピー: '#32CD32', 文字+レイヤー: '#32CD32'      };
 
 let tools = [];
 let downloads = JSON.parse(localStorage.getItem('dl') || '{}');
