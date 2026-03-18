@@ -1,4 +1,4 @@
-﻿id,name,category,desc,command,steps,steptext,tags,before_img,after_img,lisp_file,code_file,date,author,status,CSV_output
+﻿id,name,category,desc,command,steps,steptext,tags,before_img,after_img,lisp_file,code_file,date,author,status
 1,DIMQUICK,寸法,1000mm定型寸法の高速作図,DIMQUICK,img/steps/dimquick_1.png|img/steps/dimquick_2.png|img/steps/dimquick_3.png,手順1|手順2|手順3,寸法,img/before/dimquick.jpg,img/after/dimquick.jpg,lisp/dimquick.lsp,code/dimquick.lsp,250416,北川,stable
 2,PLDIM,寸法,複数ポリライン一括寸法記入,PLDIM,img/steps/pldim_1.png|img/steps/pldim_2.png|img/steps/pldim_3.png,手順1|手順2|手順3,寸法,img/before/pldim.jpg,img/after/pldim.jpg,lisp/pldim.lsp,code/pldim.lsp,260202,北川,stable
 3,DIMFIT,寸法,寸法線高さの原点一括集約,DIMFIT,img/steps/dimfit_1.png|img/steps/dimfit_2.png|img/steps/dimfit_3.png,手順1|手順2|手順3,寸法,img/before/dimfit.jpg,img/after/dimfit.jpg,lisp/dimfit.lsp,code/dimfit.lsp,260129,北川,stable
