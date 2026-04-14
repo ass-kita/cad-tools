@@ -8,7 +8,6 @@ const categoryColors = {
 function getCategoryColor(cat) { return categoryColors[cat] || '#808080'; }
 
 let tools = [];
-let recentlyViewed = JSON.parse(localStorage.getItem('recent') || '[]');
 let sortMode = 'name';
 let sortAsc = true;
 
@@ -26,127 +25,171 @@ async function init() {
             o.tags = (o.tags || '').split('|').filter(x => x);
             return o;
         });
-        
+
+        updateSortButton(); 
         draw();
-        
-        // アップロード手順ボタンの設定
-        const guideBtn = document.getElementById('guideBtn');
-        if (guideBtn) guideBtn.onclick = openGuide;
 
     } catch (e) {
-        console.error('データの読み込みに失敗しました:', e);
+        console.error(e);
     }
 }
 
-// CSVパース
+// CSV
 function parseCSV(text) {
-    const lines = text.split('\n').filter(l => l.trim());
-    return lines.map(line => {
-        let cells = [];
-        let curr = '';
-        let inQuote = false;
-        for (let char of line) {
-            if (char === '"') inQuote = !inQuote;
-            else if (char === ',' && !inQuote) { cells.push(curr); curr = ''; }
-            else curr += char;
+    return text.split('\n').filter(l => l.trim()).map(line => {
+        let cells = [], curr = '', inQuote = false;
+        for (let c of line) {
+            if (c === '"') inQuote = !inQuote;
+            else if (c === ',' && !inQuote) { cells.push(curr); curr=''; }
+            else curr += c;
         }
         cells.push(curr);
         return cells;
     });
 }
 
-// 描画関数
+// ボタン表示
+function updateSortButton() {
+    const labels = {
+        name: '名前順',
+        date: '新着順',
+        category: 'カテゴリー順',
+        recommend: 'おすすめ順'
+    };
+    document.getElementById('sortToggle').textContent =
+        `${labels[sortMode]} ${sortAsc ? '↑' : '↓'}`;
+}
+
+// 描画（★完全統一版）
 function draw(query = '') {
     const grid = document.getElementById('grid');
     if (!grid) return;
-    grid.innerHTML = ''; 
+    grid.innerHTML = '';
 
     let filtered = tools.filter(t => 
-        t.name.toLowerCase().includes(query.toLowerCase()) ||
-        t.command.toLowerCase().includes(query.toLowerCase()) ||
+        (t.name || '').toLowerCase().includes(query.toLowerCase()) ||
+        (t.command || '').toLowerCase().includes(query.toLowerCase()) ||
         (t.tags && t.tags.some(tag => tag.includes(query)))
     );
 
-    // ソート
-    filtered.sort((a, b) => {
-        let valA = a[sortMode === 'name' ? 'name' : 'date'] || '';
-        let valB = b[sortMode === 'name' ? 'name' : 'date'] || '';
-        return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    // カテゴリー件数
+    const countMap = {};
+    filtered.forEach(t => {
+        const cat = t.category || 'その他';
+        countMap[cat] = (countMap[cat] || 0) + 1;
     });
 
-    // カード生成
+    // ソート
+    filtered.sort((a, b) => {
+
+        if (sortMode === 'name') {
+            return sortAsc
+                ? (a.name || '').localeCompare(b.name || '')
+                : (b.name || '').localeCompare(a.name || '');
+        }
+
+        if (sortMode === 'date') {
+            return sortAsc
+                ? (a.date || '').localeCompare(b.date || '')
+                : (b.date || '').localeCompare(a.date || '');
+        }
+
+        if (sortMode === 'recommend') {
+            const countA = (a.status || '').split('★').length - 1;
+            const countB = (b.status || '').split('★').length - 1;
+            return sortAsc ? countA - countB : countB - countA;
+        }
+
+        if (sortMode === 'category') {
+    const countA = countMap[a.category] || 0;
+    const countB = countMap[b.category] || 0;
+
+    // ★ここが重要（昇順・降順を分岐）
+    const diff = sortAsc
+        ? countA - countB   // 少ない → 多い
+        : countB - countA;  // 多い → 少ない
+
+    if (diff !== 0) return diff;
+
+    // 同数なら名前順（ここも方向合わせる）
+    return sortAsc
+        ? (a.name || '').localeCompare(b.name || '')
+        : (b.name || '').localeCompare(a.name || '');
+}
+
+        return 0;
+    });
+
+    // 表示（全モード共通）
     filtered.forEach(t => {
         const color = getCategoryColor(t.category);
         const card = document.createElement('div');
         card.className = 'card';
         card.style.borderLeft = `10px solid ${color}`;
-        
-        // ここでデータ全体を渡す
-        card.onclick = () => openModal(t); 
+        card.onclick = () => openModal(t);
+
+        const stars = (t.status || '');
 
         card.innerHTML = `
+            <div class="card-star">${stars}</div>
             <div class="category" style="color:${color}">${t.category}</div>
             <div class="name" style="--cat-color:${color}">${t.name}</div>
             <div class="desc">${t.desc}</div>
             <div class="card-tags">
-                ${t.tags.map(tag => `<span class="card-tag">#${tag}</span>`).join('')}
+                ${(t.tags || []).map(tag => `<span class="card-tag">#${tag}</span>`).join('')}
             </div>
         `;
+
         grid.appendChild(card);
     });
 }
 
-// モーダルを開く
+// モーダル
 function openModal(o) {
-    if (!o) return;
     const modal = document.getElementById('modal');
     const body = document.getElementById('modal-body');
-    
+
     body.innerHTML = `
         <h2>${o.name} <small>(${o.command})</small></h2>
         <p>${o.desc}</p>
         <div class="modal-grid">
-            <div>
-                <h4>Before</h4>
-                <img src="${o.before}" alt="Before" style="width:100%; cursor:pointer;" onclick="window.open(this.src)">
-            </div>
-            <div>
-                <h4>After</h4>
-                <img src="${o.after}" alt="After" style="width:100%; cursor:pointer;" onclick="window.open(this.src)">
-            </div>
+            <div><h4>Before</h4><img src="${o.before}" style="width:100%"></div>
+            <div><h4>After</h4><img src="${o.after}" style="width:100%"></div>
         </div>
         <div class="modal-footer">
-            <a href="${o.file}" class="btn-main" download style="display:inline-block; padding:10px 20px; background:#00FFFF; color:#000; text-decoration:none; border-radius:5px; font-weight:bold;">LISPファイルをダウンロード</a>
+            <a href="${o.file}" class="btn-main" download>ダウンロード</a>
         </div>
     `;
     modal.classList.remove('hidden');
 }
 
-function openGuide() {
-    document.getElementById('guideModal').classList.remove('hidden');
-}
-
 function closeModal() {
     document.getElementById('modal').classList.add('hidden');
-    document.getElementById('guideModal').classList.add('hidden');
 }
 
 // イベント
-document.getElementById('search').oninput = (e) => draw(e.target.value);
-document.querySelector('.close').onclick = closeModal;
-document.querySelector('.guide-close').onclick = closeModal;
+const search = document.getElementById('search');
+const sortToggle = document.getElementById('sortToggle');
 
-document.getElementById('sortToggle').onclick = () => {
-    sortMode = (sortMode === 'name') ? 'date' : 'name';
+search.oninput = e => draw(e.target.value);
+
+sortToggle.onclick = () => {
+    const modes = ['name','date','category','recommend'];
+    sortMode = modes[(modes.indexOf(sortMode)+1)%modes.length];
+    updateSortButton();
+    draw(search.value);
+};
+
+sortToggle.oncontextmenu = e => {
+    e.preventDefault();
     sortAsc = !sortAsc;
-    document.getElementById('sortToggle').textContent = 
-        `${sortMode === 'name' ? '名前順' : '新着順'} ${sortAsc ? '↑' : '↓'}`;
-    draw(document.getElementById('search').value);
+    updateSortButton();
+    draw(search.value);
 };
 
 window.addEventListener('keydown', e => {
-    if (e.key === '/') { e.preventDefault(); document.getElementById('search').focus(); }
-    if (e.key === 'Escape') { closeModal(); }
+    if (e.key === '/') search.focus();
+    if (e.key === 'Escape') closeModal();
 });
 
 // 開始
