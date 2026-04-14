@@ -10,55 +10,60 @@
     <header>
         <h1>LISP Library</h1>
         <div class="controls">
-            <button id="guideBtn" class="btn-secondary">アップロード手順</button>
+            <button id="guideBtn">アップロード手順</button>
             <input id="search" placeholder="検索...（キーボードの [ / ] でここに移動）">
             <button id="sortToggle" class="btn-secondary">名前順 ↑</button>
-        </div>
+　　　　</div>
+　　　<div id="secret-content" class="hidden">
+  　　<h2>アーカイブ</h2>
+ 　　 <p>限定閲覧</p>
+　　　</div>
+
     </header>
 
     <div id="tagCloud" class="tag-cloud"></div>
 
     <section class="info-section">
-        <h2>お知らせ</h2>
         <div class="info-card">
-            <p><strong>【注意事項】</strong>不測の事態を踏まえて、使用前は作業用データのバックアップをお願いします。</p>
-           <p class="info-update">【検索のコツ】</strong>キーボードの「/（スラッシュ）」キーを押すと、即座に検索窓にカーソルが飛び、タイピングを開始できます。検索をリセットしてトップに戻るには「ESC」キーが便利です。</p>
-            <p class="info-update">【更新情報】ESCキーで検索クリアが可能になりました。画像はクリックで拡大、←/→キーで手順をめくれます。</p>
+            <p><strong>【注意事項】</strong>不測の事態に備え、作業データのバックアップをお願いします。</p>
+            <p class="info-update"><strong>【検索のコツ】</strong>「/」キーで検索窓へ。「ESC」でリセット。画像はクリックで拡大できます。</p>
         </div>
     </section>
 
-<section id="recentSection" class="hidden">
-    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 10px;">
-        <h2 style="margin: 0;">検索履歴</h2>
-        <button id="clearRecentBtn" class="btn-secondary" style="font-size: 11px; padding: 4px 10px;">履歴をクリア</button>
-    </div>
-    <div id="recentGrid" class="grid-mini"></div>
-</section>
+    <!-- 閲覧履歴 -->
+    <section id="recentSection" class="hidden">
+        <div class="section-header">
+            <h2>閲覧履歴</h2>
+            <button id="clearRecentBtn" class="btn-clear">閲覧履歴クリア</button>
+        </div>
+        <div id="recentGrid" class="grid-mini"></div>
+    </section>
 
-    <main id="grid"></main>
+    <!-- メイングリッド -->
+    <main id="grid" class="main-grid"></main>
 
+    <!-- 詳細モーダル -->
     <div id="modal" class="modal hidden">
         <div class="modal-content">
-            <button class="close">×</button>
+            <button class="close">&times;</button>
             <div id="modal-body"></div>
         </div>
     </div>
 
+    <!-- 手順ガイドモーダル -->
     <div id="guideModal" class="modal hidden">
         <div class="modal-content">
-            <button class="close guide-close">×</button>
-            <h2>BricsCAD LISP追加・アップロード手順</h2>
+            <button class="close guide-close">&times;</button>
+            <h2>BricsCAD LISP追加手順</h2>
             <div class="guide-body">
-                <h3>1. CADのコマンドラインに「APPLOAD」と入力</h3>
-                <p>　アプリケーションファイルをロードのダイアログボックスが開きます</p>
-                <h3>2. ダイアログボックス右上『+』ボタンをクリック</h3>
-                <p>　下部のLISP一覧に追加されます</p>
-                <h3>3. 追加したLISPの名前欄右側の『ロード』『自動ロード』にチェックを入れる</h3>
-                <p>　登録することで、次回から自動でコマンドが有効になります。</p>
+                <h3>1. コマンド「APPLOAD」を入力</h3>
+                <h3>2. 右上『+』ボタンからLISPを選択</h3>
+                <h3>3. 『ロード』『自動ロード』にチェック</h3>
             </div>
         </div>
     </div>
 
+    <!-- 画像拡大ビューアー -->
     <div id="imgViewer" class="imgViewer hidden"></div>
 
     <script src="script.js"></script>
