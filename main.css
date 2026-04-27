@@ -59,11 +59,18 @@ header h1 {
 }
 
 /* 説明文：横幅固定で折り返し */
-.card .desc { 
-    font-size: 0.85rem; 
-    color: #999; 
-    overflow-wrap: break-word; 
-    word-break: break-all;
+.card .desc {
+    font-size: 0.85rem;
+    color: #999;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    transition: color 0.2s; /* ③ 色の変化を滑らかにする */
+}
+
+/* ③ カードにホバーしたとき、その中の説明文(.desc)を白くする */
+.card:hover .desc {
+    color: #fff;
+}ord-break: break-all;
 }
 
 /* タグ：サイズと色を説明文に統一 */
